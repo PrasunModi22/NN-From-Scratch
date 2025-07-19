@@ -1,15 +1,17 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from tqdm import tqdm
-from scipy.special import logsumexp
-from keras import datasets
 
-class MLP():
-    def __init__(self, din, dout):
-        self.W = (np.random.randn(din, dout) * 2 - 1) * (np.sqrt(6) / np.sqrt(din + dout))
-        self.n = (np.random.randn(din) * 2 - 1) * (np.sqrt(6) / np.sqrt(din + dout))
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
 
-    def forward(self, x):
-        self.x = x
-        return x @ self.W + self.b
-    
+training_inputs = np.array([[0, 0, 1],
+                          [1, 1, 1],
+                          [1, 0, 1],
+                          [0, 1, 1]])
+
+training_outputs = np.array([[0, 1, 1, 0]]).T
+
+np.random.seed(1)
+
+synaptic_weights = 2 * np.random.random((3, 1)) - 1
+
+print("Random starting synaptic weights: " + str(synaptic_weights))
